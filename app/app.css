@@ -1,16 +1,468 @@
-@import "tailwindcss" source(".");
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
-@theme {
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+/* Custom Properties for Liquid Glass Design System */
+:root {
+  /* Refined Typography Scale - Smaller, More Precise */
+  --font-size-xs: 0.6875rem;    /* 11px */
+  --font-size-sm: 0.75rem;      /* 12px */
+  --font-size-base: 0.8125rem;  /* 13px */
+  --font-size-lg: 0.875rem;     /* 14px */
+  --font-size-xl: 1rem;         /* 16px */
+  --font-size-2xl: 1.125rem;    /* 18px */
+  --font-size-3xl: 1.375rem;    /* 22px */
+  --font-size-4xl: 1.75rem;     /* 28px */
+  --font-size-5xl: 2.25rem;     /* 36px */
+
+  /* Liquid Glass Palette */
+  --color-glass-clear: rgba(255, 255, 255, 0.05);
+  --color-glass-light: rgba(255, 255, 255, 0.1);
+  --color-glass-medium: rgba(255, 255, 255, 0.15);
+  --color-glass-heavy: rgba(255, 255, 255, 0.25);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+  
+  --color-metal-dark: #0a0a0a;
+  --color-metal-base: #1a1a1a;
+  --color-metal-light: #2a2a2a;
+  --color-metal-accent: #3a3a3a;
+  
+  --color-chrome-50: #f8fafc;
+  --color-chrome-100: #f1f5f9;
+  --color-chrome-200: #e2e8f0;
+  --color-chrome-300: #cbd5e1;
+  --color-chrome-400: #94a3b8;
+  --color-chrome-500: #64748b;
+  --color-chrome-600: #475569;
+  --color-chrome-700: #334155;
+  --color-chrome-800: #1e293b;
+  --color-chrome-900: #0f172a;
+  
+  /* Neutral Accent Colors */
+  --color-accent-light: #ffffff;
+  --color-accent-medium: #a1a1aa;
+  --color-accent-glow: rgba(255, 255, 255, 0.8);
+
+  /* Refined Spacing Scale */
+  --space-xs: 0.125rem;   /* 2px */
+  --space-sm: 0.25rem;    /* 4px */
+  --space-md: 0.5rem;     /* 8px */
+  --space-lg: 0.75rem;    /* 12px */
+  --space-xl: 1rem;       /* 16px */
+  --space-2xl: 1.5rem;    /* 24px */
+  --space-3xl: 2rem;      /* 32px */
+  
+  /* Liquid Glass Border Radius */
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-2xl: 1.5rem;    /* 24px */
+  --radius-full: 9999px;
+  
+  /* Glass Morphism Shadows & Effects */
+  --shadow-glass: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --shadow-glass-hover: 
+    0 12px 48px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --shadow-metal: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* Liquid Transitions & Animations */
+  --transition-glass: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-metal: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-liquid: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-liquid: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-glass: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-metal: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+/* Liquid Glass Base Styles */
+* {
+  box-sizing: border-box;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-chrome-100);
+  background: linear-gradient(135deg, var(--color-metal-dark) 0%, var(--color-metal-base) 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+  /* Liquid Glass Background Effects */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.01) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Liquid Glass Typography */
+.text-display {
+  font-size: var(--font-size-5xl);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--color-chrome-100), var(--color-chrome-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-heading-1 {
+  font-size: var(--font-size-4xl);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--color-chrome-100);
+}
+
+.text-heading-2 {
+  font-size: var(--font-size-3xl);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-chrome-200);
+}
+
+.text-heading-3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-chrome-200);
+}
+
+.text-body-large {
+  font-size: var(--font-size-lg);
+  line-height: 1.5;
+  color: var(--color-chrome-300);
+}
+
+.text-body {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-chrome-400);
+}
+
+.text-body-small {
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--color-chrome-400);
+}
+
+.text-caption {
+  font-size: var(--font-size-xs);
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--color-chrome-500);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+/* Liquid Glass Animations */
+.animate-liquid-in {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  filter: blur(4px);
+  animation: liquidIn 0.8s var(--ease-liquid) forwards;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s var(--ease-liquid);
+}
+
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-glass-float {
+  animation: glassFloat 3s var(--ease-glass) infinite;
+}
+
+.animate-metal-shine {
+  animation: metalShine 2s var(--ease-metal) infinite;
+}
+
+@keyframes liquidIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    filter: blur(4px);
   }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes glassFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes metalShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Glass Morphism Utilities */
+.glass-panel {
+  background: var(--color-glass-light);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass);
+  transition: var(--transition-glass);
+  position: relative;
+}
+
+.glass-panel:hover {
+  background: var(--color-glass-medium);
+  box-shadow: var(--shadow-glass-hover);
+  transform: translateY(-2px);
+}
+
+/* Otherworldly Halo Effect */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(from 0deg, transparent, var(--color-accent-glow), transparent);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(8px);
+}
+
+.glass-panel:hover::before {
+  opacity: 0.6;
+  animation: haloRotate 3s linear infinite;
+}
+
+@keyframes haloRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hero Shaded Animation */
+@keyframes heroShade {
+  0%, 100% { 
+    background: linear-gradient(135deg, 
+      var(--color-metal-dark) 0%, 
+      var(--color-metal-base) 30%, 
+      var(--color-metal-light) 50%, 
+      var(--color-metal-base) 70%, 
+      var(--color-metal-dark) 100%
+    );
+  }
+  50% { 
+    background: linear-gradient(135deg, 
+      var(--color-metal-base) 0%, 
+      var(--color-metal-light) 30%, 
+      var(--color-metal-accent) 50%, 
+      var(--color-metal-light) 70%, 
+      var(--color-metal-base) 100%
+    );
+  }
+}
+
+.hero-shaded {
+  animation: heroShade 8s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+.metal-surface {
+  background: linear-gradient(135deg, var(--color-metal-light), var(--color-metal-base));
+  box-shadow: var(--shadow-metal);
+  position: relative;
+  overflow: hidden;
+}
+
+.metal-surface::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -200%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: var(--transition-metal);
+}
+
+.metal-surface:hover::before {
+  left: 200%;
+}
+
+/* Liquid Transitions */
+.transition-liquid {
+  transition: var(--transition-liquid);
+}
+
+.transition-glass {
+  transition: var(--transition-glass);
+}
+
+.transition-metal {
+  transition: var(--transition-metal);
+}
+
+/* Focus States */
+.focus-glass {
+  outline: none;
+  box-shadow: 
+    var(--shadow-glass),
+    0 0 0 2px var(--color-accent-glow),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-glass-clear);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-glass-medium);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-glass-heavy);
+}
+
+/* Utility Classes for Liquid Glass Theme */
+.text-chrome-100 { color: var(--color-chrome-100); }
+.text-chrome-200 { color: var(--color-chrome-200); }
+.text-chrome-300 { color: var(--color-chrome-300); }
+.text-chrome-400 { color: var(--color-chrome-400); }
+.text-chrome-500 { color: var(--color-chrome-500); }
+
+.bg-glass-clear { background-color: var(--color-glass-clear); }
+.bg-glass-light { background-color: var(--color-glass-light); }
+.bg-glass-medium { background-color: var(--color-glass-medium); }
+.bg-glass-heavy { background-color: var(--color-glass-heavy); }
+
+.border-glass-border { border-color: var(--color-glass-border); }
+
+.bg-metal-dark { background-color: var(--color-metal-dark); }
+.bg-metal-base { background-color: var(--color-metal-base); }
+.bg-metal-light { background-color: var(--color-metal-light); }
+
+.from-metal-dark { --tw-gradient-from: var(--color-metal-dark); }
+.via-metal-base { --tw-gradient-via: var(--color-metal-base); }
+.to-metal-base { --tw-gradient-to: var(--color-metal-base); }
+
+.from-accent-light { --tw-gradient-from: var(--color-accent-light); }
+.to-accent-medium { --tw-gradient-to: var(--color-accent-medium); }
+.from-accent-medium { --tw-gradient-from: var(--color-accent-medium); }
+.to-accent-light { --tw-gradient-to: var(--color-accent-light); }
+
+.text-accent-light { color: var(--color-accent-light); }
+.text-accent-medium { color: var(--color-accent-medium); }
+.text-accent-glow { color: var(--color-accent-glow); }
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Search Modal Animations */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+
+
+/* Liquid Glass Overlay */
+.liquid-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 75%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

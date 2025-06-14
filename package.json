@@ -16,10 +16,12 @@
     "publish": true
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "isbot": "5.1.26",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-router": "7.5.2"
+    "react-router": "7.5.2",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.2.4",

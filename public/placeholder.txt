@@ -1,0 +1,16 @@
+# Media Assets Placeholder
+
+This directory should contain:
+
+## Videos
+- hero-video.mp4 (Hero section background video)
+- genesis-01-video.mp4 (Genesis collection video)
+- metamorphosis-01-video.mp4 (Metamorphosis collection video)
+- ethereal-01-video.mp4 (Ethereal collection video)
+
+## Images
+- genesis-01.jpg (Genesis collection poster)
+- metamorphosis-01.jpg (Metamorphosis collection poster)
+- ethereal-01.jpg (Ethereal collection poster)
+
+For development, you can use placeholder videos/images or create simple colored rectangles as placeholders. 
